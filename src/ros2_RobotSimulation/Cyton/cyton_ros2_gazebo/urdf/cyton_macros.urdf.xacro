@@ -1,226 +1,279 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cyton">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    
+
     <xacro:include filename="$(find cyton_ros2_gazebo)/urdf/cyton_gazebo.xacro" />
+    <xacro:include filename="$(find cyton_ros2_gazebo)/urdf/cyton_transmission.xacro" />
 
-    <!-- Initial footprint motor used here -->
-    <xacro:macro name="base_footprint" params="prefix">
-        <link name="base_footprint">
-            <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                    <sphere radius="0.001" />
-                </geometry>
-                <material name="white">
-                    <color rgba="1 1 1 1"/>
-                </material>
-            </visual>
-        </link>
+    <xacro:macro name="cyton_robot">
 
-        <joint name="base_joint" type="fixed">
-            <parent link="base_footprint" />
-            <child link="${prefix}base_link" />
-            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-        </joint>
-    </xacro:macro>
+        <xacro:cyton_transmission />
+        <xacro:cyton_gazebo />
 
-    <xacro:macro name="cyton" params="prefix virtual_ee">
+        <!-- Initial footprint motor used here -->
+        <xacro:macro name="base_footprint" params="prefix">
+            <link name="base_footprint">
+                <visual>
+                    <origin xyz="0 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <sphere radius="0.001" />
+                    </geometry>
+                    <material name="white">
+                        <color rgba="1 1 1 1" />
+                    </material>
+                </visual>
+            </link>
+
+            <joint name="base_joint" type="fixed">
+                <parent link="base_footprint" />
+                <child link="base_link" />
+                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            </joint>
+        </xacro:macro>
+
         <!-- Base of robot here -->
-        <link name="${prefix}base_link">
+        <link name="base_link">
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/gamma_base.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/gamma_base.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0 0.0115 0.047"/>
+                <origin xyz="0 0.0115 0.047" />
                 <geometry>
-                    <box size="0.154 0.177 0.094"/>
+                    <box size="0.154 0.177 0.094" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="100.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx="1.1027" iyy="1.1027" izz="1.1027"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- First motor located here -->
-        <joint name="${prefix}shoulder_roll_joint" type="revolute">
-            <parent link="${prefix}base_link" />
-            <child link="${prefix}shoulder_roll" />
+        <joint name="shoulder_roll_joint" type="revolute">
+            <parent link="base_link" />
+            <child link="shoulder_roll" />
             <origin xyz="0 0 0.05315" rpy="0 0 1.2" />
             <limit lower="-2.618" upper="2.618" effort="100.0" velocity="1.0" />
             <axis xyz="0 0 1" />
         </joint>
 
-        <link name="${prefix}shoulder_roll">
+        <link name="shoulder_roll">
             <visual>
-                <origin xyz="0 0 0" rpy="1.5708 0 3.14159"/>
+                <origin xyz="0 0 0" rpy="1.5708 0 3.14159" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Shoulder_Roll.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Shoulder_Roll.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0.0 0.069 0.0587"/>
+                <origin xyz="0.0 0.069 0.0587" />
                 <geometry>
-                    <box size="0.09829 0.18143 0.08392"/>
+                    <box size="0.09829 0.18143 0.08392" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="50.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".1027" iyy=".1027" izz=".1027"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Second motor located here -->
-        <joint name="${prefix}shoulder_pitch_joint" type="revolute">
-            <parent link="${prefix}shoulder_roll" />
-            <child link="${prefix}shoulder_pitch" />
+        <joint name="shoulder_pitch_joint" type="revolute">
+            <parent link="shoulder_roll" />
+            <child link="shoulder_pitch" />
             <origin xyz="0 0 0.063" rpy="1.2 0 0" />
             <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
-        <link name="${prefix}shoulder_pitch">
+        <link name="shoulder_pitch">
             <visual>
                 <origin xyz="0.028 0 0" rpy="0 1.5708 0" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Shoulder_Pitch.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Shoulder_Pitch.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="-0.001 0.064 0.1745"/>
+                <origin xyz="-0.001 0.064 0.1745" />
                 <geometry>
-                    <box size="0.0709 0.19363 0.083"/>
+                    <box size="0.0709 0.19363 0.083" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="20.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".0827" iyy=".0827" izz=".0827"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Third motor located here -->
-        <joint name="${prefix}elbow_roll_joint" type="revolute">
-            <parent link="${prefix}shoulder_pitch" />
-            <child link="${prefix}elbow_roll" />
+        <joint name="elbow_roll_joint" type="revolute">
+            <parent link="shoulder_pitch" />
+            <child link="elbow_roll" />
             <origin xyz="0 0 0.089" rpy="0 0 1.2" />
             <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
             <axis xyz="0 0 1" />
         </joint>
 
-        <link name="${prefix}elbow_roll">
+        <link name="elbow_roll">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 3.92699" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Elbow_Roll.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Elbow_Roll.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="-0.0225 0.039 0.3068"/>
+                <origin xyz="-0.0225 0.039 0.3068" />
                 <geometry>
-                    <box size="0.0717 0.1846 0.0756"/>
+                    <box size="0.0717 0.1846 0.0756" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="10.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".0627" iyy=".0627" izz=".0627"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Fourth motor located here -->
-        <joint name="${prefix}elbow_pitch_joint" type="revolute">
-            <parent link="${prefix}elbow_roll" />
-            <child link="${prefix}elbow_pitch" />
+        <joint name="elbow_pitch_joint" type="revolute">
+            <parent link="elbow_roll" />
+            <child link="elbow_pitch" />
             <origin xyz="0 0 0.052" rpy="1.2 0 0" />
             <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
-        <link name="${prefix}elbow_pitch">
+        <link name="elbow_pitch">
             <visual>
                 <!-- Not sure if this is the correct orientation. -->
                 <origin xyz="0.027 0 0" rpy="1.5708 0 1.5708" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Elbow_Pitch.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Elbow_Pitch.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0.0346 0.0461 0.4228"/>
+                <origin xyz="0.0346 0.0461 0.4228" />
                 <geometry>
-                    <box size="0.0549 0.1557 0.076"/>
+                    <box size="0.0549 0.1557 0.076" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="10.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".0327" iyy=".0327" izz=".0327"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Fifth motor located here -->
-        <joint name="${prefix}elbow_yaw_joint" type="revolute">
-            <parent link="${prefix}elbow_pitch" />
-            <child link="${prefix}elbow_yaw" />
+        <joint name="elbow_yaw_joint" type="revolute">
+            <parent link="elbow_pitch" />
+            <child link="elbow_yaw" />
             <origin xyz="0 0 0.072" rpy="0 -1.2 0" />
             <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
             <axis xyz="0 -1 0" />
         </joint>
 
-        <link name="${prefix}elbow_yaw">
+        <link name="elbow_yaw">
             <visual>
                 <origin xyz="0 0 0" rpy="1.5708 0 0" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Elbow_Yaw.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Elbow_Yaw.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0.0172 0.0209 0.516"/>
+                <origin xyz="0.0172 0.0209 0.516" />
                 <geometry>
-                    <box size="0.0535 0.1160 0.0402"/>
+                    <box size="0.0535 0.1160 0.0402" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="10.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".0227" iyy=".0227" izz=".0227"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Sixth motor located here -->
-        <joint name="${prefix}wrist_pitch_joint" type="revolute">
-            <parent link="${prefix}elbow_yaw" />
-            <child link="${prefix}wrist_pitch" />
+        <joint name="wrist_pitch_joint" type="revolute">
+            <parent link="elbow_yaw" />
+            <child link="wrist_pitch" />
             <origin xyz="0 0 0.0718" rpy="1.2 0 0" />
             <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
-        <link name="${prefix}wrist_pitch">
+        <link name="wrist_pitch">
             <visual>
                 <origin xyz="0.027 0 0" rpy="1.5708 0 1.5708" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Wrist_Pitch.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Wrist_Pitch.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0.0257 0.0118 0.5617"/>
+                <origin xyz="0.0257 0.0118 0.5617" />
                 <geometry>
-                    <box size="0.026 0.0435 0.05185"/>
+                    <box size="0.026 0.0435 0.05185" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="10.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".0127" iyy=".0127" izz=".0127"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Seventh motor located here -->
-        <joint name="${prefix}wrist_roll_joint" type="revolute">
-            <parent link="${prefix}wrist_pitch" />
-            <child link="${prefix}wrist_roll" />
+        <joint name="wrist_roll_joint" type="revolute">
+            <parent link="wrist_pitch" />
+            <child link="wrist_roll" />
             <origin xyz="0 0 0.051425" rpy="0 0 1.2" />
             <limit lower="-2.61799" upper="2.61799" effort="100.0" velocity="1.0" />
             <axis xyz="0 0 1" />
         </joint>
 
-        <link name="${prefix}wrist_roll">
+        <link name="wrist_roll">
             <visual>
                 <origin xyz="0 0 0" rpy="0 3.14159 1.5708" />
                 <geometry>
-                    <mesh filename="package://cyton_ros2_gazebo/meshes/Wrist_Roll.dae"/>
+                    <mesh filename="package://cyton_ros2_gazebo/meshes/Wrist_Roll.dae" />
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="-0.0063 -0.0014 0.6102"/>
+                <origin xyz="-0.0063 -0.0014 0.6102" />
                 <geometry>
-                    <box size="0.0518 0.0723 0.1004"/>
+                    <box size="0.0518 0.0723 0.1004" />
                 </geometry>
             </collision>
+            <inertial>
+                <mass value="10.0" />
+                <origin rpy="0 0 0" xyz="0 0 0" />
+                <inertia ixx=".0027" iyy=".0027" izz=".0027"
+                    ixy="0" ixz="0" iyz="0" />
+            </inertial>
         </link>
 
         <!-- Eigth motor located here -->
-        <joint name="${prefix}gripper_joint" type="prismatic">
-            <parent link="${prefix}wrist_roll" />
-            <child link="${prefix}gripper_finger1" />
+        <!-- <joint name="gripper_joint" type="prismatic">
+            <parent link="wrist_roll" />
+            <child link="gripper_finger1" />
             <origin xyz="-0.01331 0.00485 0.077225" rpy="0 0 0" />
             <limit lower="-0.008" upper="0.008" effort="100.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
-        <link name="${prefix}gripper_finger1">
+        <link name="gripper_finger1">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
@@ -233,19 +286,19 @@
                     <box size="0.015 0.0229 0.0475"/>
                 </geometry>
             </collision>
-        </link>
+        </link> -->
 
         <!-- Eighth motor located here -->
-        <joint name="${prefix}gripper_joint2" type="prismatic">
-            <parent link="${prefix}wrist_roll" />
-            <child link="${prefix}gripper_finger2" />
+        <!-- <joint name="gripper_joint2" type="prismatic">
+            <parent link="wrist_roll" />
+            <child link="gripper_finger2" />
             <origin xyz="0.0098 0.00485 0.077225" rpy="0 0 0" />
             <limit lower="-0.008" upper="0.008" effort="100.0" velocity="1.0" />
-            <mimic joint="${prefix}gripper_joint" multiplier="-1"/>
+            <mimic joint="gripper_joint" multiplier="-1"/>
             <axis xyz="1 0 0" />
         </joint>
 
-        <link name="${prefix}gripper_finger2">
+        <link name="gripper_finger2">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
@@ -258,16 +311,16 @@
                     <box size="0.015 0.0229 0.0475"/>
                 </geometry>
             </collision>
-        </link>
+        </link> -->
 
-        <xacro:if value="${virtual_ee}"> <!-- virtual end-effector -->
-            <joint name="${prefix}virtual_endeffector_joint" type="fixed">
-                <parent link="${prefix}wrist_roll" />
-                <child link="${prefix}virtual_endeffector" />
+        <!-- <xacro:if value="${virtual_ee}">
+            <joint name="virtual_endeffector_joint" type="fixed">
+                <parent link="wrist_roll" />
+                <child link="virtual_endeffector" />
                 <origin xyz="-0.002316 0.0079 0.079425" rpy="0 0 0" />
             </joint>
 
-            <link name="${prefix}virtual_endeffector">
+            <link name="virtual_endeffector">
                 <visual>
                     <origin xyz="0 0 0" rpy="0 0 0" />
                     <geometry>
@@ -278,7 +331,7 @@
                     </material>
                 </visual>
             </link>
-        </xacro:if>
+        </xacro:if> -->
     </xacro:macro>
 
 </robot>
