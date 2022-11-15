@@ -126,13 +126,19 @@ def generate_launch_description():
         output="screen"
     )
 
+    load_joint_state_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_start_controller', 'joint_state_controller'],
+        output='screen'
+    )
+
 
     # ***** RETURN LAUNCH DESCRIPTION ***** #
     return LaunchDescription([
-        joint_state_broadcaster,
-        joint_trajectory_controller,
-        velocity_controller,
-        gazebo, 
         node_robot_state_publisher,
+        # joint_state_broadcaster,
+        # load_joint_state_controller,
+        # joint_trajectory_controller,
+        # velocity_controller,
+        gazebo, 
         spawn_entity,
     ])

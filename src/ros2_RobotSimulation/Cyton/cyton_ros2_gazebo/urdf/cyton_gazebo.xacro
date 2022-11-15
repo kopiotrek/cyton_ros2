@@ -181,7 +181,7 @@
       </joint>
 
       <!-- cyton_finger_joint1 -->
-      <joint name="gripper_joint">
+      <!-- <joint name="gripper_joint">
         <command_interface name="position">
           <param name="min">-0.001</param>
           <param name="max">0.04</param>
@@ -193,10 +193,10 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-      </joint>
+      </joint> -->
 
       <!-- cyton_finger_joint2 -->
-      <joint name="gripper_joint2">
+      <!-- <joint name="gripper_joint2">
         <command_interface name="position">
           <param name="min">-0.001</param>
           <param name="max">0.04</param>
@@ -208,7 +208,7 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-      </joint>
+      </joint> -->
 
     </ros2_control>
 
@@ -240,7 +240,7 @@
       <selfCollide>false</selfCollide>
       <material>Gazebo/Orange</material>
     </gazebo>
-    <gazebo reference="gripper_finger1">
+    <!-- <gazebo reference="gripper_finger1">
       <selfCollide>false</selfCollide>
       <material>Gazebo/Orange</material>
     </gazebo>
@@ -251,7 +251,7 @@
     <gazebo reference="virtual_endeffector">
       <selfCollide>false</selfCollide>
       <material>Gazebo/Orange</material>
-    </gazebo>
+    </gazebo> -->
     <gazebo reference="base_footprint">
       <selfCollide>false</selfCollide>
       <material>Gazebo/Orange</material>
@@ -261,11 +261,11 @@
       <material>Gazebo/Orange</material>
     </gazebo>
 
-    <gazebo reference="virtual_endeffector_joint">
-      <preserveFixedJoint>true</preserveFixedJoint>
+    <!-- <gazebo reference="virtual_endeffector_joint">
+      <preserveFixedJoint>true</preserveFixedJoint> -->
       <!-- For compatibility with SDFormat < 4.4 -->
-      <disableFixedJointLumping>true</disableFixedJointLumping>
-    </gazebo>
+      <!-- <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo> -->
 
   </xacro:macro>
 
