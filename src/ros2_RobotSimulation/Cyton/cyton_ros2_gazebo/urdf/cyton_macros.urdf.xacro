@@ -11,10 +11,17 @@
         <xacro:cyton_gazebo />
 
         <!-- Initial footprint motor used here -->
-        <xacro:macro name="base_footprint" params="prefix">
+        <xacro:macro name="base_footprint">
             <link name="base_footprint">
+                <!-- ZMIENIĆ!!! -->
+                <inertial>
+                    <mass value="2.92"/>
+                    <origin rpy="0 0 0" xyz="-0.025566 -2.88e-05 0.057332"/>
+                    <inertia ixx="0.00782229414331" ixy="-1.56191622996e-05" ixz="-0.00126005738123" iyy="0.0109027971813" iyz="1.08233858202e-05" izz="0.0102355503949"/>
+                  </inertial>
+                <!-- ZMIENIĆ -->
                 <visual>
-                    <origin xyz="0 0 0" rpy="0 0 0" />
+                    <origin xyz="0 0 1" rpy="0 0 0" />
                     <geometry>
                         <sphere radius="0.001" />
                     </geometry>
@@ -22,11 +29,18 @@
                         <color rgba="1 1 1 1" />
                     </material>
                 </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <sphere radius="0.001" />
+                    </geometry>
+                </collision>
             </link>
 
             <joint name="base_joint" type="fixed">
                 <parent link="base_footprint" />
                 <child link="base_link" />
+                <dynamics damping="0.5" friction="0.5"/>
                 <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
             </joint>
         </xacro:macro>
@@ -42,14 +56,14 @@
             <collision>
                 <origin xyz="0 0.0115 0.047" />
                 <geometry>
-                    <box size="0.154 0.177 0.094" />
+                    <box size="0.01 0.01 0.01" />
                 </geometry>
             </collision>
             <inertial>
                 <mass value="100.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx="1.1027" iyy="1.1027" izz="1.1027"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -58,7 +72,8 @@
             <parent link="base_link" />
             <child link="shoulder_roll" />
             <origin xyz="0 0 0.05315" rpy="0 0 1.2" />
-            <limit lower="-2.618" upper="2.618" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-2.618" upper="2.618" effort="7.0" velocity="1.0" />
             <axis xyz="0 0 1" />
         </joint>
 
@@ -79,7 +94,7 @@
                 <mass value="50.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".1027" iyy=".1027" izz=".1027"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -88,7 +103,8 @@
             <parent link="shoulder_roll" />
             <child link="shoulder_pitch" />
             <origin xyz="0 0 0.063" rpy="1.2 0 0" />
-            <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-1.8326" upper="1.8326" effort="7.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
@@ -109,16 +125,17 @@
                 <mass value="20.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".0827" iyy=".0827" izz=".0827"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
-
+<!-- TUTAJ ODPIERDALA -->
         <!-- Third motor located here -->
         <joint name="elbow_roll_joint" type="revolute">
             <parent link="shoulder_pitch" />
             <child link="elbow_roll" />
             <origin xyz="0 0 0.089" rpy="0 0 1.2" />
-            <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-1.8326" upper="1.8326" effort="7.0" velocity="1.0" />
             <axis xyz="0 0 1" />
         </joint>
 
@@ -139,7 +156,7 @@
                 <mass value="10.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".0627" iyy=".0627" izz=".0627"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -148,7 +165,8 @@
             <parent link="elbow_roll" />
             <child link="elbow_pitch" />
             <origin xyz="0 0 0.052" rpy="1.2 0 0" />
-            <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-1.8326" upper="1.8326" effort="7.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
@@ -170,7 +188,7 @@
                 <mass value="10.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".0327" iyy=".0327" izz=".0327"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -179,7 +197,8 @@
             <parent link="elbow_pitch" />
             <child link="elbow_yaw" />
             <origin xyz="0 0 0.072" rpy="0 -1.2 0" />
-            <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-1.8326" upper="1.8326" effort="7.0" velocity="1.0" />
             <axis xyz="0 -1 0" />
         </joint>
 
@@ -200,7 +219,7 @@
                 <mass value="10.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".0227" iyy=".0227" izz=".0227"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -209,7 +228,8 @@
             <parent link="elbow_yaw" />
             <child link="wrist_pitch" />
             <origin xyz="0 0 0.0718" rpy="1.2 0 0" />
-            <limit lower="-1.8326" upper="1.8326" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-1.8326" upper="1.8326" effort="7.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
@@ -230,7 +250,7 @@
                 <mass value="10.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".0127" iyy=".0127" izz=".0127"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -239,7 +259,8 @@
             <parent link="wrist_pitch" />
             <child link="wrist_roll" />
             <origin xyz="0 0 0.051425" rpy="0 0 1.2" />
-            <limit lower="-2.61799" upper="2.61799" effort="100.0" velocity="1.0" />
+            <dynamics damping="0.5" friction="0.5"/>
+            <limit lower="-2.61799" upper="2.61799" effort="7.0" velocity="1.0" />
             <axis xyz="0 0 1" />
         </joint>
 
@@ -260,7 +281,7 @@
                 <mass value="10.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <inertia ixx=".0027" iyy=".0027" izz=".0027"
-                    ixy="0" ixz="0" iyz="0" />
+                    ixy="0.05" ixz="0.05" iyz="0.05" />
             </inertial>
         </link>
 
@@ -269,7 +290,7 @@
             <parent link="wrist_roll" />
             <child link="gripper_finger1" />
             <origin xyz="-0.01331 0.00485 0.077225" rpy="0 0 0" />
-            <limit lower="-0.008" upper="0.008" effort="100.0" velocity="1.0" />
+            <limit lower="-0.008" upper="0.008" effort="7.0" velocity="1.0" />
             <axis xyz="1 0 0" />
         </joint>
 
@@ -293,7 +314,7 @@
             <parent link="wrist_roll" />
             <child link="gripper_finger2" />
             <origin xyz="0.0098 0.00485 0.077225" rpy="0 0 0" />
-            <limit lower="-0.008" upper="0.008" effort="100.0" velocity="1.0" />
+            <limit lower="-0.008" upper="0.008" effort="7.0" velocity="1.0" />
             <mimic joint="gripper_joint" multiplier="-1"/>
             <axis xyz="1 0 0" />
         </joint>
