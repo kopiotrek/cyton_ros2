@@ -30,9 +30,9 @@
                     </material>
                 </visual>
                 <collision>
-                    <origin xyz="0 0 0" rpy="0 0 0" />
+                    <origin xyz="0 0 1" rpy="0 0 0" />
                     <geometry>
-                        <sphere radius="0.001" />
+                        <sphere radius="0.01" />
                     </geometry>
                 </collision>
             </link>
@@ -53,12 +53,24 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/gamma_base.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="0 0.0115 0.047" />
                 <geometry>
                     <box size="0.01 0.01 0.01" />
                 </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0.0026" />
+                <geometry>
+                    <box size="0.1 0.1 0.007" />
+                </geometry>
             </collision>
+            <!-- <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
+                </geometry>
+            </collision> -->
             <inertial>
                 <mass value="100.0" />
                 <origin rpy="0 0 0" xyz="0 0 0" />
@@ -84,10 +96,23 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Shoulder_Roll.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="0.0 0.069 0.0587" />
                 <geometry>
                     <box size="0.09829 0.18143 0.08392" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0 0 0" />
+                <geometry>
+                    <box size="0.09829 0.18143 0.08392" />
+                </geometry>
+            </collision> -->
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
@@ -115,10 +140,22 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Shoulder_Pitch.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="-0.001 0.064 0.1745" />
                 <geometry>
                     <box size="0.0709 0.19363 0.083" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0.028 0 0" />
+                <geometry>
+                    <box size="0.0709 0.19363 0.083" />
+                </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
@@ -146,10 +183,22 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Elbow_Roll.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="-0.0225 0.039 0.3068" />
                 <geometry>
                     <box size="0.0717 0.1846 0.0756" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0 0 0" />
+                <geometry>
+                    <box size="0.0717 0.1846 0.0756" />
+                </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
@@ -178,10 +227,22 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Elbow_Pitch.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="0.0346 0.0461 0.4228" />
                 <geometry>
                     <box size="0.0549 0.1557 0.076" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0.027 0 0" />
+                <geometry>
+                    <box size="0.0549 0.1557 0.076" />
+                </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
@@ -209,10 +270,22 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Elbow_Yaw.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="0.0172 0.0209 0.516" />
                 <geometry>
                     <box size="0.0535 0.1160 0.0402" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0 0 0" />
+                <geometry>
+                    <box size="0.0535 0.1160 0.0402" />
+                </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
@@ -240,10 +313,22 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Wrist_Pitch.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="0.0257 0.0118 0.5617" />
                 <geometry>
                     <box size="0.026 0.0435 0.05185" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0.027 0 0" />
+                <geometry>
+                    <box size="0.026 0.0435 0.05185" />
+                </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
@@ -271,10 +356,22 @@
                     <mesh filename="file://$(find cyton_ros2_gazebo)/meshes/visual/Wrist_Roll.dae" />
                 </geometry>
             </visual>
-            <collision>
+            <!-- <collision>
                 <origin xyz="-0.0063 -0.0014 0.6102" />
                 <geometry>
                     <box size="0.0518 0.0723 0.1004" />
+                </geometry>
+            </collision> -->
+            <!-- <collision>
+                <origin xyz="0 0 0" />
+                <geometry>
+                    <box size="0.0518 0.0723 0.1004" />
+                </geometry>
+            </collision> -->
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.001" />
                 </geometry>
             </collision>
             <inertial>
